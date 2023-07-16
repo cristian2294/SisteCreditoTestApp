@@ -5,7 +5,7 @@ import com.cristian.sistecreditotestapp.listarjuegos.dominio.modelos.Juego as Ju
 
 data class Juego(
     @SerializedName("id")
-    val id: String,
+    val id: Int,
     @SerializedName("title")
     val titulo: String,
     @SerializedName("thumbnail")

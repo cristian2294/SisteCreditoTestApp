@@ -1,7 +1,7 @@
 package com.cristian.sistecreditotestapp.listarjuegos.presentacion.modelos
 
 data class Juego(
-    val id: String,
+    val id: Int,
     val titulo: String,
     val imagen: String,
     val descripcionCorta: String,

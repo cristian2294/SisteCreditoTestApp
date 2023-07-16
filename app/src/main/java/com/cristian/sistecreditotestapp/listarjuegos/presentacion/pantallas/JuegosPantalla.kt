@@ -68,6 +68,7 @@ fun JuegosPantalla(navControlador: NavHostController, juegosViewModel: JuegosVie
         )
 
         MenuOpciones(
+            navControlador,
             Modifier.constrainAs(menuOpciones) {
                 bottom.linkTo(parent.bottom)
                 start.linkTo(parent.start)
@@ -102,7 +103,7 @@ fun ListaJuegos(
     juegosViewModel: JuegosViewModel,
     modifier: Modifier,
 ) {
-    var mostrarDialogoError by rememberSaveable { mutableStateOf(false) }
+    val mostrarDialogoError: Boolean by juegosViewModel.mostrarDialogo.collectAsState()
     val estadoJuegos by juegosViewModel.estadoJuegos.collectAsState()
     when (estadoJuegos) {
         EstadoJuego.Cargando -> {
@@ -110,10 +111,9 @@ fun ListaJuegos(
         }
 
         is EstadoJuego.Error -> {
-            mostrarDialogoError = true
             MostrarDialogoError(
                 mostrarDialogoError = mostrarDialogoError,
-                entendido = { mostrarDialogoError = false },
+                entendido = { juegosViewModel.cerrarDialogoError() },
                 error = (estadoJuegos as EstadoJuego.Error).error,
             )
         }
@@ -181,8 +181,9 @@ fun ItemJuego(juego: Juego, navControlador: NavHostController) {
         modifier = Modifier
             .fillMaxWidth()
             .padding(bottom = dimensionResource(id = R.dimen.dimen_16dp))
-            .clickable { navControlador.navigate(Rutas.pantallaDetalleJuego.ruta) },
+            .clickable { navControlador.navigate(Rutas.pantallaDetalleJuego.crearRuta(juego.id)) },
         elevation = CardDefaults.cardElevation(dimensionResource(id = R.dimen.dimen_4dp)),
+        colors = CardDefaults.cardColors(containerColor = Color.White),
     ) {
         Column(
             modifier = Modifier.fillMaxWidth(),
@@ -209,6 +210,7 @@ fun ItemJuego(juego: Juego, navControlador: NavHostController) {
 
             Text(
                 text = juego.descripcionCorta,
+                fontSize = 12.sp,
                 fontFamily = openSans,
                 modifier = Modifier.padding(
                     start = dimensionResource(id = R.dimen.dimen_8dp),
@@ -261,14 +263,17 @@ fun obtenerIconoPorPlataforma(plataforma: String): ImageVector {
 }
 
 @Composable
-fun MenuOpciones(modifier: Modifier) {
+fun MenuOpciones(navControlador: NavHostController, modifier: Modifier) {
     var indice by rememberSaveable { mutableStateOf(0) }
     NavigationBar(
         modifier = modifier,
     ) {
         NavigationBarItem(
             selected = indice == 0,
-            onClick = { indice = 0 },
+            onClick = {
+                indice = 0
+                navControlador.navigate(Rutas.pantallaInicio.ruta)
+            },
             icon = {
                 Icon(
                     imageVector = Icons.Default.Home,
