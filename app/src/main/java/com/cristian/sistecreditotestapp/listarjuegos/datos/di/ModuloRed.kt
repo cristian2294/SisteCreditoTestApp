@@ -1,5 +1,6 @@
 package com.cristian.sistecreditotestapp.listarjuegos.datos.di
 
+import com.cristian.sistecreditotestapp.utils.Constants.Companion.URL_BASE
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -14,7 +15,7 @@ object ModuloRed {
     @Singleton
     @Provides
     fun proveerRetrofit(): Retrofit {
-        val baseUrl = "https://www.freetogame.com/api/"
+        val baseUrl = URL_BASE
         return Retrofit.Builder()
             .baseUrl(baseUrl)
             .addConverterFactory(GsonConverterFactory.create())

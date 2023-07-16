@@ -3,7 +3,7 @@ package com.cristian.sistecreditotestapp.listarjuegos.dominio.modelos
 import com.cristian.sistecreditotestapp.listarjuegos.presentacion.modelos.Juego as JuegoPresentacion
 
 data class Juego(
-    val id: String,
+    val id: Int,
     val titulo: String,
     val imagen: String,
     val descripcionCorta: String,

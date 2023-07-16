@@ -19,20 +19,27 @@ class JuegosViewModel @Inject constructor(
     private val _estadoJuegos = MutableStateFlow<EstadoJuego>(EstadoJuego.Cargando)
     val estadoJuegos: StateFlow<EstadoJuego> get() = _estadoJuegos
 
+    private val _mostrarDialogo = MutableStateFlow(false)
+    val mostrarDialogo: StateFlow<Boolean> get() = _mostrarDialogo
+
     init {
         obtenerJuegos()
     }
 
     private fun obtenerJuegos() {
         viewModelScope.launch {
-            _estadoJuegos.value = EstadoJuego.Cargando
             try {
                 val juegosDominio = obtenerJuegosUC()
                 val juegosPresentacion = juegosDominio.map { it.aPresentacion() }
                 _estadoJuegos.value = EstadoJuego.Exitoso(juegosPresentacion)
             } catch (error: Exception) {
                 _estadoJuegos.value = EstadoJuego.Error(error)
+                _mostrarDialogo.value = true
             }
         }
+    }
+
+    fun cerrarDialogoError() {
+        _mostrarDialogo.value = false
     }
 }
