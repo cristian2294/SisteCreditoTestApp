@@ -288,7 +288,10 @@ fun MenuOpciones(navControlador: NavHostController, modifier: Modifier) {
         )
         NavigationBarItem(
             selected = indice == 1,
-            onClick = { indice = 1 },
+            onClick = {
+                indice = 1
+                navControlador.navigate(Rutas.pantallaFavoritos.ruta)
+            },
             icon = {
                 Icon(
                     imageVector = Icons.Default.Favorite,
