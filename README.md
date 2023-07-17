@@ -14,5 +14,13 @@ Este proyecto de Android es un ejemplo de una aplicacion que consume una API pub
 - **Compose**: La interfaz de usuario se ha desarrollado utilizando Jetpack Compose, el kit de herramientas moderno y declarativo para la creación de interfaces de usuario en Android.
 - **Hilt**: Se utiliza Hilt como framework para la inyección de dependencias, facilitando la gestión y la creación de instancias de objetos en la app.
 - **MockK**: La biblioteca MockK se utiliza para escribir pruebas unitarias y crear objetos simulados, permitiendo una mejor cobertura de pruebas y garantizando la calidad del código.
+- **Corutinas**: para manejo de hilos para no bloquear el hilo principal.
+
+## Para tener en cuenta:
+- En la pantalla de inicio al lado del genero del juego se ve un icono, dependiendo de la plataforma, mostrara un icono u otro, en este caso las opciones que traia la API eran PC windows y browser web.
 
 ## Evidencias:
+<img src="https://github.com/cristian2294/SisteCreditoTestApp/blob/main/inicio.png" width="400">
+<img src="https://github.com/cristian2294/SisteCreditoTestApp/blob/main/detalle.png" width="400">
+<img src="https://github.com/cristian2294/SisteCreditoTestApp/blob/main/detalle2.png" width="400">
+<img src="https://github.com/cristian2294/SisteCreditoTestApp/blob/main/favoritos.png" width="400">
