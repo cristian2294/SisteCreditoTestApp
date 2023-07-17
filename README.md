@@ -1,6 +1,4 @@
 # SisteCreditoTestApp Android
-# MegaLoginApp Android
-
 Este proyecto de Android es un ejemplo de una aplicacion que consume una API publica de video juegos, muestra un listado de estos mismos, puede visualizar la informacion detallada de cada juego y adicional puede guardar los juegos en el dispositivo de manera local para sus juegos favoritos.
 
 ## Características y tecnologías utilizadas:
