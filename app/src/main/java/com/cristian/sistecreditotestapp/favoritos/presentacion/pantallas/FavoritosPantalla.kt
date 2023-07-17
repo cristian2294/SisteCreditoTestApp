@@ -40,13 +40,14 @@ import com.cristian.sistecreditotestapp.favoritos.presentacion.estados.EstadoJue
 import com.cristian.sistecreditotestapp.favoritos.presentacion.viewmodel.JuegoFavoritoViewModel
 import com.cristian.sistecreditotestapp.listarjuegos.presentacion.pantallas.MenuOpciones
 import com.cristian.sistecreditotestapp.listarjuegos.presentacion.pantallas.MostrarComponenteCarga
+import com.cristian.sistecreditotestapp.listarjuegos.presentacion.pantallas.MostrarDialogoError
 
 @Composable
 fun FavoritosPantalla(
     navControlador: NavHostController,
     juegoFavoritoViewModel: JuegoFavoritoViewModel,
 ) {
-    // val mostrarDialogoError: Boolean by juegosViewModel.mostrarDialogo.collectAsState()
+    val mostrarDialogoError: Boolean by juegoFavoritoViewModel.mostrarDialogo.collectAsState()
 
     val estadoJuegoFavorito by juegoFavoritoViewModel.estadoJuegoFavorito.collectAsState()
     when (estadoJuegoFavorito) {
@@ -55,7 +56,11 @@ fun FavoritosPantalla(
         }
 
         is EstadoJuegoFavorito.Error -> {
-            Unit
+            MostrarDialogoError(
+                mostrarDialogoError = mostrarDialogoError,
+                entendido = { juegoFavoritoViewModel.cerrarDialogoError() },
+                error = (estadoJuegoFavorito as EstadoJuegoFavorito.Error).error,
+            )
         }
 
         is EstadoJuegoFavorito.Exitoso -> {

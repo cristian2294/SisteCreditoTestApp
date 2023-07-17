@@ -9,6 +9,7 @@ import com.cristian.sistecreditotestapp.favoritos.dominio.modelos.JuegoFavorito
 import com.cristian.sistecreditotestapp.favoritos.presentacion.estados.EstadoJuegoFavorito
 import com.cristian.sistecreditotestapp.favoritos.presentacion.estados.EstadoJuegoFavorito.Exitoso
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
@@ -24,9 +25,15 @@ class JuegoFavoritoViewModel @Inject constructor(
     obtenerJuegosFavoritosUC: ObtenerJuegosFavoritosUC,
 ) : ViewModel() {
 
+    private val _mostrarDialogo = MutableStateFlow(false)
+    val mostrarDialogo: StateFlow<Boolean> get() = _mostrarDialogo
+
     val estadoJuegoFavorito: StateFlow<EstadoJuegoFavorito> =
         obtenerJuegosFavoritosUC.invoke().map(::Exitoso)
-            .catch { EstadoJuegoFavorito.Error(it) }
+            .catch {
+                EstadoJuegoFavorito.Error(it)
+                _mostrarDialogo.value = true
+            }
             .stateIn(
                 viewModelScope,
                 SharingStarted.WhileSubscribed(5000),
@@ -43,5 +50,9 @@ class JuegoFavoritoViewModel @Inject constructor(
         viewModelScope.launch {
             removerJuegoFavoritoUC.invoke(juegoFavorito)
         }
+    }
+
+    fun cerrarDialogoError() {
+        _mostrarDialogo.value = false
     }
 }
