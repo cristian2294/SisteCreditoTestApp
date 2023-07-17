@@ -12,5 +12,8 @@ class Constants {
         const val ID_JUEGO = "id"
 
         const val PANTALLA_FAVORITOS = "pantalla_favoritos"
+
+        // Base de datos
+        const val NOMBRE_DB = "JuegosBaseDatos"
     }
 }
