@@ -22,3 +22,4 @@ Este proyecto de Android es un ejemplo de una aplicacion que consume una API pub
 <img src="https://github.com/cristian2294/SisteCreditoTestApp/blob/main/detalle.png" width="400">
 <img src="https://github.com/cristian2294/SisteCreditoTestApp/blob/main/detalle2.png" width="400">
 <img src="https://github.com/cristian2294/SisteCreditoTestApp/blob/main/favoritos.png" width="400">
+<img src="https://github.com/cristian2294/SisteCreditoTestApp/blob/main/IMGTEST1.png" width="800">
