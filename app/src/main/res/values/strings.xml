@@ -1,3 +1,26 @@
 <resources>
     <string name="app_name">SisteCreditoTestApp</string>
+
+    <!-- Pantalla inicio -->
+    <string name="pantalla_inicio.opcion_menu.inicio">Inicio</string>
+    <string name="pantalla_inicio.opcion_menu.favoritos">Favoritos</string>
+    <string name="pantalla_inicio.opcion_menu.categorias">Categorias</string>
+    <string name="pantalla_inicio.descipcion_contenido.desarrolladora">Desarrolladora</string>
+
+    <!-- Pantalla inicio dialogo error -->
+    <string name="pantalla_inicio.error_dialogo.titulo">Ha ocurrido un error</string>
+    <string name="pantalla_inicio.error_dialogo.descripcion">Se ha presentado un error inesperado  %s</string>
+    <string name="pantalla_inicio.error_dialogo.boton_entendido">Entendido</string>
+
+    <!-- Pantalla detalle del juego  -->
+    <string name="pantalla_detalle_juego.desarrolladora_titulo">Desarrolladora</string>
+    <string name="pantalla_detalle_juego.url_titulo">Sitio Web</string>
+    <string name="pantalla_detalle_juego.capturas_pantalla_titulo">Capturas de pantalla</string>
+    <string name="pantalla_detalle_juego.boton_agregar_favoritos">Se ha agregado el juego a tu seccion de favoritos exitosamente.</string>
+
+    <!-- Pantalla favoritos  -->
+    <string name="pantalla_favoritos.boton_remover_favoritos">Se ha eliminado el juego a tu seccion de favoritos exitosamente.</string>
+
+    <!-- Pantalla categorias  -->
+    <string name="pantalla_categorias.proximamente">Esta funcion no esta habilitada en el mómento. Estara disponible en una proxima version</string>
 </resources>
