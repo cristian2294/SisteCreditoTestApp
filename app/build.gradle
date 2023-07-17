@@ -98,4 +98,11 @@ dependencies {
 
     //Icons
     implementation "androidx.compose.material:material-icons-extended:1.4.3"
+
+    //mockk
+    testImplementation "io.mockk:mockk:1.13.5"
+
+    //coroutines
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1'
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.1"
 }
