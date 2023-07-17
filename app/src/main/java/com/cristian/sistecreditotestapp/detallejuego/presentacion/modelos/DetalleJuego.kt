@@ -1,5 +1,7 @@
 package com.cristian.sistecreditotestapp.detallejuego.presentacion.modelos
 
+import com.cristian.sistecreditotestapp.favoritos.dominio.modelos.JuegoFavorito
+
 data class DetalleJuego(
     val id: Int,
     val titulo: String,
@@ -11,7 +13,16 @@ data class DetalleJuego(
     val descripcion: String,
     val requerimientosMinimos: RequerimientosMinimos?,
     val capturasPantalla: List<CapturaPantalla>,
-)
+) {
+    fun aJuegoFavorito(detalleJuego: DetalleJuego): JuegoFavorito {
+        return JuegoFavorito(
+            id = detalleJuego.id,
+            titulo = detalleJuego.titulo,
+            imagen = detalleJuego.imagen,
+            desarrollador = detalleJuego.desarrollador,
+        )
+    }
+}
 
 data class RequerimientosMinimos(
     val graficos: String,

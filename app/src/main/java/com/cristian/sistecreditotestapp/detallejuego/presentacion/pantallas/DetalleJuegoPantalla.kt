@@ -1,5 +1,6 @@
 package com.cristian.sistecreditotestapp.detallejuego.presentacion.pantallas
 
+import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -30,6 +31,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.Font
@@ -44,6 +46,7 @@ import com.cristian.sistecreditotestapp.detallejuego.presentacion.estados.Estado
 import com.cristian.sistecreditotestapp.detallejuego.presentacion.modelos.CapturaPantalla
 import com.cristian.sistecreditotestapp.detallejuego.presentacion.modelos.DetalleJuego
 import com.cristian.sistecreditotestapp.detallejuego.presentacion.viewmodel.DetalleJuegoViewModel
+import com.cristian.sistecreditotestapp.favoritos.presentacion.viewmodel.JuegoFavoritoViewModel
 import com.cristian.sistecreditotestapp.listarjuegos.presentacion.pantallas.MenuOpciones
 import com.cristian.sistecreditotestapp.listarjuegos.presentacion.pantallas.MostrarComponenteCarga
 import com.cristian.sistecreditotestapp.listarjuegos.presentacion.pantallas.MostrarDialogoError
@@ -53,6 +56,7 @@ fun DetalleJuegoPantalla(
     navControlador: NavHostController,
     id: Int,
     detalleJuegoViewModel: DetalleJuegoViewModel,
+    juegoFavoritoViewModel: JuegoFavoritoViewModel,
 ) {
     detalleJuegoViewModel.obtenerDetalleJuego(id)
     val mostrarDialogoError: Boolean by detalleJuegoViewModel.mostrarDialogo.collectAsState()
@@ -75,6 +79,7 @@ fun DetalleJuegoPantalla(
             CargarDetalleJuego(
                 navControlador,
                 (estadoDestalleJuego as EstadoDetalleJuego.Exitoso).detalleJuego,
+                juegoFavoritoViewModel,
             )
         }
     }
@@ -82,12 +87,22 @@ fun DetalleJuegoPantalla(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CargarDetalleJuego(navControlador: NavHostController, detalleJuego: DetalleJuego) {
+fun CargarDetalleJuego(
+    navControlador: NavHostController,
+    detalleJuego: DetalleJuego,
+    juegoFavoritoViewModel: JuegoFavoritoViewModel,
+) {
     Scaffold(
         bottomBar = {
             MenuOpciones(navControlador, modifier = Modifier)
         },
-        floatingActionButton = { BotonAgregarAFavoritos(modifier = Modifier) },
+        floatingActionButton = {
+            BotonAgregarAFavoritos(
+                modifier = Modifier,
+                juegoFavoritoViewModel,
+                detalleJuego,
+            )
+        },
         floatingActionButtonPosition = FabPosition.End,
     ) { contentPadding ->
         LazyColumn(modifier = Modifier.padding(contentPadding).fillMaxWidth()) {
@@ -298,10 +313,24 @@ fun ItemCapturaPantalla(capturaPantalla: CapturaPantalla) {
 }
 
 @Composable
-fun BotonAgregarAFavoritos(modifier: Modifier) {
+fun BotonAgregarAFavoritos(
+    modifier: Modifier,
+    juegoFavoritoViewModel: JuegoFavoritoViewModel,
+    detalleJuego: DetalleJuego,
+) {
+    val contexto = LocalContext.current
     FloatingActionButton(
         modifier = modifier,
-        onClick = { },
+        onClick = {
+            juegoFavoritoViewModel.agregarJuegoFavorito(
+                detalleJuego.aJuegoFavorito(detalleJuego),
+            )
+            Toast.makeText(
+                contexto,
+                R.string.pantalla_detalle_juego_boton_agregar_favoritos,
+                Toast.LENGTH_SHORT,
+            ).show()
+        },
         containerColor = Color.White,
         contentColor = Color.Red,
     ) {

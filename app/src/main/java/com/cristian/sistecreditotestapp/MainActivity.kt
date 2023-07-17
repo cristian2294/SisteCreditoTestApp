@@ -13,6 +13,7 @@ import com.cristian.sistecreditotestapp.comun.Rutas
 import com.cristian.sistecreditotestapp.detallejuego.presentacion.pantallas.DetalleJuegoPantalla
 import com.cristian.sistecreditotestapp.detallejuego.presentacion.viewmodel.DetalleJuegoViewModel
 import com.cristian.sistecreditotestapp.favoritos.presentacion.pantallas.FavoritosPantalla
+import com.cristian.sistecreditotestapp.favoritos.presentacion.viewmodel.JuegoFavoritoViewModel
 import com.cristian.sistecreditotestapp.listarjuegos.presentacion.pantallas.JuegosPantalla
 import com.cristian.sistecreditotestapp.listarjuegos.presentacion.viewmodel.JuegosViewModel
 import com.cristian.sistecreditotestapp.ui.theme.SisteCreditoTestAppTheme
@@ -26,6 +27,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         val juegosViewModel: JuegosViewModel by viewModels()
         val detalleJuegoViewModel: DetalleJuegoViewModel by viewModels()
+        val juegoFavoritoViewModel: JuegoFavoritoViewModel by viewModels()
 
         setContent {
             SisteCreditoTestAppTheme {
@@ -48,10 +50,14 @@ class MainActivity : ComponentActivity() {
                             navControlador,
                             entrada.arguments?.getInt(ID_JUEGO) ?: 0,
                             detalleJuegoViewModel,
+                            juegoFavoritoViewModel,
                         )
                     }
                     composable(route = Rutas.pantallaFavoritos.ruta) {
-                        FavoritosPantalla()
+                        FavoritosPantalla(
+                            navControlador,
+                            juegoFavoritoViewModel,
+                        )
                     }
                 }
             }
